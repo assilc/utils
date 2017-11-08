@@ -25,6 +25,7 @@
      (other . "gnu"))))
  '(c-offsets-alist (quote ((substatement-label . +))))
  '(delete-selection-mode nil)
+ '(ecb-options-version "2.50")
  '(ecb-source-path
    (quote
     (("/" "/")
@@ -37,6 +38,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(mark-even-if-inactive t)
+ '(package-selected-packages (quote (sr-speedbar ggtags ecb auto-complete-clang)))
  '(recentf-mode t)
  '(save-place t nil (saveplace))
  '(scroll-bar-mode (quote right))
@@ -181,15 +183,6 @@
 ;; Begin completion mode.
 (setq completion-styles '(partial-completion initials))
 (setq completion-pcm-complete-word-inserts-delimiters t)
-
-;;(load "completion")
-;;(partial-completion-mode t)
-;; End completion mode.
-
-;; Indentation
-(setq c-default-style "bsd"
-      c-basic-offset 4)
-(c-set-offset 'case-label '+)
 
 
 ;ABBREVIATION SECTION
