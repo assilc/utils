@@ -1,3 +1,4 @@
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 ;; start gnuserv stuff. Put it up front so you don't get into a
 ;; timeout problem when starting emacs from gnuclient or gnudoit,
 ;; according to Cristian Ionescu-Idbohrn
@@ -12,48 +13,6 @@
 					; end gnuserv stuff
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(c-basic-offset 2)
- '(c-default-style
-   (quote
-    ((c-mode . "gnu")
-     (c++-mode . "c++")
-     (java-mode . "java")
-     (other . "gnu"))))
- '(c-offsets-alist (quote ((substatement-label . +))))
- '(delete-selection-mode nil)
- '(ecb-options-version "2.50")
- '(ecb-source-path
-   (quote
-    (("/" "/")
-     ("/home/ach/sandbox/rep/trunk_Jira1339_ach" "Jira1339"))))
- '(gdb-many-windows t)
- '(ggtags-global-ignore-case t)
- '(global-visual-line-mode nil)
- '(grep-find-command
-   "find . -type d -path './Exports/*' -prune -o -name \"*.[ch]\" -o -name \"*.cpp\" -o -name \"*.hpp\" | xargs  -e grep -n -s -i -E ")
- '(indent-tabs-mode nil)
- '(inhibit-startup-screen t)
- '(mark-even-if-inactive t)
- '(package-selected-packages (quote (sr-speedbar ggtags ecb auto-complete-clang)))
- '(recentf-mode t)
- '(save-place t nil (saveplace))
- '(scroll-bar-mode (quote right))
- '(standard-indent 2)
- '(text-mode-hook (quote (turn-on-auto-fill text-mode-hook-identify)))
- '(tool-bar-mode nil)
- '(transient-mark-mode 1)
- '(uniquify-buffer-name-style (quote forward) nil (uniquify)))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#000000" :foreground "#ffffe0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "urw" :family "Nimbus Mono L"))))
  '(border ((t nil)))
  '(cursor ((t (:background "#f0e0d0"))))
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:background "black" :foreground "LightSteelBlue"))))
@@ -75,6 +34,7 @@
 
 (setq default-tab-width 2)
 (menu-bar-mode 0)
+(tool-bar-mode 0)
 (scroll-bar-mode 0)
 (setq cc-other-file-alist
       '(("\\.c"   (".h"))
@@ -143,7 +103,7 @@
 )
 
 ;; Window shifting. C-x-o lets us go forward a window (or several). This
-;; one lets us go back one or more windows. From Glickstein.
+;; one lets us go back one or more windows. From Glickstein.g
 (defun other-window-backward (&optional n)
   "Select previous Nth window."
   (called-interactively "P")
@@ -165,14 +125,14 @@
 		       (background-color . "#000000")
 		       (foreground-color . "#f0f0f0")
 		       (cursor-color	 . "red3")
-	;;	       (font . "-bitstream-Bitstream Vera Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
+;;		       (font . "-bitstream-Bitstream Vera Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
 		       (user-position t)
 		       )))
        
 ;; Set the default font and frame size for the initial frame.
        (setq initial-frame-alist
 	     '((top . 0) (left . 0)
-	       (width . 750) (height . 500)
+;;	       (width . 750) (height . 500)
 	       (background-color . "#04060a")
 	       (foreground-color . "#fff0e0")
 	       (cursor-color	. "red3")
@@ -295,11 +255,6 @@
 ; --------------- End Tags ---------------------
 
 
-;; -------------- use ediff instead of vc-diff ----------
-(eval-after-load "vc-hooks"
-         '(define-key vc-prefix-map "=" 'ediff-revision))
-
-;; ------------- End ediff -----------------------------
 
 ;;-------------------  Keymaping ---------------------
 
@@ -329,43 +284,6 @@
 
 ;;--------------- End Keymapping -------------
 
-;; ;;------------ CEDET Configuration  -------------------------------------------------
-
-(semantic-mode 1)
-(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-
-
-;; (load-file "~/bin/cedet-1.1/common/cedet.el")
-;;(global-ede-mode 1)                      ; Enable the Project management system
-;; (semantic-load-enable-code-helpers)      ; Enable prototype help and smart completion 
-;; (global-srecode-minor-mode 1)            ; Enable template insertion menu
-;; ;;-------------- end CEDET ----------------------------------------------------------
-
-;; -----------  CEDET Configuration -----------------------------------------------------
-; (global-ede-mode 1)                      ; Enable the Project management system
-;(require 'semantic/sb)
-
-;(ede-cpp-root-project "TDX"
-;                :name "TDX Project"
-;                :file "~/work/rep/trunk_simulcrypt_preperations_ach/BASELINES.txt"
-;                :include-path '("/"
-;                                "/common"
-;                                "/systemcontroller/src/application"
-;                                "/backends/be_ctrl/src/application"
-;                               )
-;              ; :system-include-path '("~/exp/include")
-;              ; :spp-table '(("isUnix" . "")
-;              ;             ("BOOST_TEST_DYN_LINK" . ""))
-;)
-;(defun my-cedet-hook ()
-;  (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-;  (local-set-key "\C-c?" 'semantic-ia-complete-symbol-menu)
-;  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-;  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
-;(add-hook 'c-mode-common-hook 'my-cedet-hook)
-;;-----------------------------------------------------------------------------------------
-
 (setq stack-trace-on-error t)
 
 ;;; Emacs is not a package manager, and here we load its package manager!
@@ -380,46 +298,6 @@
 (package-initialize)
 ;;; end packages
 
-;;; Required packages
-;;; everytime emacs starts, it will automatically check if those packages are
-;;; missing, it will install them automatically
-(when (not package-archive-contents)
-  (package-refresh-contents))
-(defvar project/packages
-  '(cedet ecb auto-complete-clang ggtags))
-(dolist (p project/packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
-
-;;;  end checking for ecb cedet
-
-
-;; activate ecb
-(require 'ecb)
-;(require 'ecb-autoloads)
-
-(setq ecb-layout-name "leftright2")
-
-(setq ecb-compile-window-height 12)
-
-(setq ecb-show-sources-in-directories-buffer 'always)
-
-; activate and deactivate ecb
-(global-set-key (kbd "C-x C-;") 'ecb-activate)
-(global-set-key (kbd "C-x C-'") 'ecb-deactivate)
-
-; show/hide ecb window
-(global-set-key (kbd "C-;") 'ecb-show-ecb-windows)
-(global-set-key (kbd "C-'") 'ecb-hide-ecb-windows)
-
-; quick navigation between ecb windows
-(global-set-key (kbd "C-)") 'ecb-goto-window-edit1)
-(global-set-key (kbd "C-!") 'ecb-goto-window-directories)
-(global-set-key (kbd "C-@") 'ecb-goto-window-sources)
-(global-set-key (kbd "C-#") 'ecb-goto-window-methods)
-(global-set-key (kbd "C-$") 'ecb-goto-window-compilation)
-
-;;; end ecb
 
 ;;; auto-complete
 (require 'auto-complete-clang)
@@ -448,3 +326,10 @@
          (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
          (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
 
+;; cmake settings
+(add-to-list 'load-path "~/.emacs.d/lisp/cmake-font-lock")
+
+(autoload 'cmake-font-lock-activate "cmake-font-lock" nil t)
+(add-hook 'cmake-mode-hook 'cmake-font-lock-activate)
+
+(require 'cmake-project)
